@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuck.core.mapper.MOrdersMapper">
+
+    <resultMap id="BaseResultMap" type="com.fuck.core.entity.MOrders">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="m_no" jdbcType="VARCHAR" property="mNo"/>
+        <result column="m_orders_type" jdbcType="VARCHAR" property="mOrdersType"/>
+        <result column="m_money" jdbcType="DOUBLE" property="mMoney"/>
+        <result column="m_url" jdbcType="VARCHAR" property="mUrl"/>
+        <result column="m_status" jdbcType="VARCHAR" property="mStatus"/>
+        <result column="m_expiration_time" jdbcType="INTEGER" property="mExpirationTime"/>
+        <result column="m_p" jdbcType="VARCHAR" property="mP"/>
+        <result column="m_c" jdbcType="VARCHAR" property="mC"/>
+        <result column="m_a" jdbcType="VARCHAR" property="mA"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+      id,m_no, m_orders_type, m_money, m_url, m_status, m_expiration_time, m_p, m_c, m_a,
+      create_time, update_time
+    </sql>
+
+
+    <delete id="delete" parameterType="java.lang.Long">
+      delete from m_orders
+      where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+
+    <insert id="insert" parameterType="com.fuck.core.entity.MOrders">
+      insert into m_orders (id,m_no, m_orders_type,
+        m_money, m_url, m_status,
+        m_expiration_time, m_p, m_c,
+        m_a)
+      values (#{id,jdbcType=BIGINT}, #{mNo,jdbcType=VARCHAR}, #{mOrdersType,jdbcType=VARCHAR},
+        #{mMoney,jdbcType=DOUBLE}, #{mUrl,jdbcType=VARCHAR}, #{mStatus,jdbcType=VARCHAR},
+        #{mExpirationTime,jdbcType=INTEGER}, #{mP,jdbcType=VARCHAR}, #{mC,jdbcType=VARCHAR},
+        #{mA,jdbcType=VARCHAR})
+    </insert>
+
+
+    <insert id="insertDynamic" parameterType="com.fuck.core.entity.MOrders">
+        insert into m_orders
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="mNo != null">
+                m_no,
+            </if>
+            <if test="mOrdersType != null">
+                m_orders_type,
+            </if>
+            <if test="mMoney != null">
+                m_money,
+            </if>
+            <if test="mUrl != null">
+                m_url,
+            </if>
+            <if test="mStatus != null">
+                m_status,
+            </if>
+            <if test="mExpirationTime != null">
+                m_expiration_time,
+            </if>
+            <if test="mP != null">
+                m_p,
+            </if>
+            <if test="mC != null">
+                m_c,
+            </if>
+            <if test="mA != null">
+                m_a,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="mNo != null">
+                #{mNo,jdbcType=VARCHAR},
+            </if>
+            <if test="mOrdersType != null">
+                #{mOrdersType,jdbcType=VARCHAR},
+            </if>
+            <if test="mMoney != null">
+                #{mMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="mUrl != null">
+                #{mUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="mStatus != null">
+                #{mStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="mExpirationTime != null">
+                #{mExpirationTime,jdbcType=INTEGER},
+            </if>
+            <if test="mP != null">
+                #{mP,jdbcType=VARCHAR},
+            </if>
+            <if test="mC != null">
+                #{mC,jdbcType=VARCHAR},
+            </if>
+            <if test="mA != null">
+                #{mA,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="updateDynamic" parameterType="com.fuck.core.entity.MOrders">
+        update m_orders
+        <set>
+            <if test="mNo != null">
+                m_no = #{mNo,jdbcType=VARCHAR},
+            </if>
+            <if test="mOrdersType != null">
+                m_orders_type = #{mOrdersType,jdbcType=VARCHAR},
+            </if>
+            <if test="mMoney != null">
+                m_money = #{mMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="mUrl != null">
+                m_url = #{mUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="mStatus != null">
+                m_status = #{mStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="mExpirationTime != null">
+                m_expiration_time = #{mExpirationTime,jdbcType=INTEGER},
+            </if>
+            <if test="mP != null">
+                m_p = #{mP,jdbcType=VARCHAR},
+            </if>
+            <if test="mC != null">
+                m_c = #{mC,jdbcType=VARCHAR},
+            </if>
+            <if test="mA != null">
+                m_a = #{mA,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+
+    <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from m_orders
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectDynamic" parameterType="com.fuck.core.entity.MOrders" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where 1=1
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                and id = #{id,jdbcType=BIGINT},
+            </if>
+            <if test="mNo != null">
+                and m_no = #{mNo,jdbcType=VARCHAR},
+            </if>
+            <if test="mOrdersType != null">
+                and m_orders_type = #{mOrdersType,jdbcType=VARCHAR},
+            </if>
+            <if test="mMoney != null">
+                and m_money = #{mMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="mUrl != null">
+                and m_url = #{mUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="mStatus != null">
+                and m_status = #{mStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="mExpirationTime != null">
+                and m_expiration_time = #{mExpirationTime,jdbcType=INTEGER},
+            </if>
+            <if test="mP != null">
+                and m_p = #{mP,jdbcType=VARCHAR},
+            </if>
+            <if test="mC != null">
+                and m_c = #{mC,jdbcType=VARCHAR},
+            </if>
+            <if test="mA != null">
+                and m_a = #{mA,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </select>
+</mapper>

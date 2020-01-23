@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuck.core.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.fuck.core.entity.User">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="balance" jdbcType="DOUBLE" property="balance"/>
+        <result column="freeze" jdbcType="DOUBLE" property="freeze"/>
+        <result column="merchantno" jdbcType="VARCHAR" property="merchantno"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="invitationCode" jdbcType="VARCHAR" property="invitationCode"/>
+        <result column="superiorCode" jdbcType="VARCHAR" property="superiorCode"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="delete" jdbcType="INTEGER" property="delete"/>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+      id, name, mobile, password, balance, freeze, merchantno, type, invitationCode, superiorCode, create_time, update_time, delete
+    </sql>
+
+
+    <delete id="delete" parameterType="java.lang.Long">
+      delete from user
+      where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+
+    <insert id="insert" parameterType="com.fuck.core.entity.User">
+      insert into user ( name, mobile, password, balance, freeze,
+        merchantno, type, invitationCode, superiorCode)
+      values ( #{name,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},
+      #{balance,jdbcType=DOUBLE}, #{freeze,jdbcType=DOUBLE},#{merchantno,jdbcType=VARCHAR},
+      #{type,jdbcType=VARCHAR}, #{invitationCode,jdbcType=VARCHAR}, #{superiorCode,jdbcType=VARCHAR})
+    </insert>
+
+
+    <insert id="insertDynamic" parameterType="com.fuck.core.entity.User">
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="balance != null">
+                balance,
+            </if>
+            <if test="freeze != null">
+                freeze,
+            </if>
+            <if test="merchantno != null">
+                merchantno,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="invitationCode != null">
+                invitationCode,
+            </if>
+            <if test="superiorCode != null">
+                superiorCode,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="delete != null">
+                delete,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="balance != null">
+                #{balance,jdbcType=DOUBLE},
+            </if>
+            <if test="freeze != null">
+                #{freeze,jdbcType=DOUBLE},
+            </if>
+            <if test="merchantno != null">
+                #{merchantno,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="invitationCode != null">
+                #{invitationCode,jdbcType=VARCHAR},
+            </if>
+            <if test="superiorCode != null">
+                #{superiorCode,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="delete != null">
+                #{delete,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="updateDynamic" parameterType="com.fuck.core.entity.User">
+        update user
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="balance != null">
+                balance = #{balance,jdbcType=DOUBLE},
+            </if>
+            <if test="freeze != null">
+                freeze = #{freeze,jdbcType=DOUBLE},
+            </if>
+            <if test="merchantno != null">
+                merchantno = #{merchantno,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="invitationCode != null">
+                invitationCode = #{invitationCode,jdbcType=VARCHAR},
+            </if>
+            <if test="superiorCode != null">
+                superiorCode = #{superiorCode,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="delete != null">
+                delete = #{delete,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+
+    <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+
+    <select id="findUserByMobileAndType" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where mobile = #{mobile,jdbcType=VARCHAR} and type = #{type,jdbcType=VARCHAR} and delete = 0
+    </select>
+</mapper>
