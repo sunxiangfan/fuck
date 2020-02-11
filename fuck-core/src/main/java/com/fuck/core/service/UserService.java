@@ -7,4 +7,6 @@ public interface UserService {
     User findUserByMobileAndType(String mobile, String type);
 
     int insert(User user);
+
+    int insertDynamic(User user);
 }

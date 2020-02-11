@@ -84,7 +84,7 @@ public class UserController {
                 return ResultVO.fail("用户已存在");
             }
             Object code = redisTemplate.opsForValue().get("user.register.code" + dto.getType() + "." + dto.getMobile());
-            if (null == code || !code.equals(dto.getCode())) {
+            if (null == code || !code.toString().equals(dto.getCode())) {
                 return ResultVO.fail("验证码不正确");
             }
             if (!dto.getPassword().equals(dto.getConfirmPassword())) {
@@ -101,7 +101,7 @@ public class UserController {
                 Long icode = Long.parseLong(dto.getMobile() + dto.getType());
                 user.setInvitationCode(Number62.encoding(icode));
             }
-            userService.insert(user);
+            userService.insertDynamic(user);
             return ResultVO.success();
         } catch (Exception e) {
             log.error("register error", e);
@@ -121,7 +121,7 @@ public class UserController {
 
             //TODO 发注册短信
 
-            return ResultVO.success();
+            return ResultVO.success(code);
         } catch (Exception e) {
             log.error("sendMsg error", e);
             return ResultVO.fail("网络异常，请稍后再试");

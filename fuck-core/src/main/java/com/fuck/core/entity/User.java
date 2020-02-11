@@ -31,5 +31,5 @@ public class User {
 
     private Date updateTime;
 
-    private Integer delete;
+    private Integer deleted;
 }

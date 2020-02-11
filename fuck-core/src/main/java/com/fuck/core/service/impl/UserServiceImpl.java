@@ -22,4 +22,9 @@ public class UserServiceImpl implements UserService {
         return userMapper.insert(user);
     }
 
+    @Override
+    public int insertDynamic(User user) {
+        return userMapper.insertDynamic(user);
+    }
+
 }
