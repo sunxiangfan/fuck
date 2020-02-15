@@ -1,52 +1,35 @@
 package com.fuck.merchant.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.fuck.core.dto.LoginDTO;
-import com.fuck.core.dto.RegisterDTO;
-import com.fuck.core.entity.User;
-import com.fuck.core.entity.MOrders;
-import com.fuck.core.result.ResultVO;
-import com.fuck.core.service.MOrdersService;
-import com.fuck.core.service.UserService;
 import com.fuck.merchant.config.Number62;
 import com.fuck.merchant.config.TokenUtil;
+import com.fuck.merchant.dto.LoginDTO;
+import com.fuck.merchant.dto.RegisterDTO;
+import com.fuck.merchant.entity.User;
+import com.fuck.merchant.result.ResultVO;
+import com.fuck.merchant.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.util.Base64Utils;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Base64;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @RestController
 public class UserController {
 
+    //1商家初始化订单，2用户已接单，3商家确认完成，4商家确认失败，5已过期
+
     private static final String md5 = "@R)(*EH@";
 
     @Autowired
     private RedisTemplate redisTemplate;
     @Autowired
-    private MOrdersService mOrdersService;
-    @Autowired
     private UserService userService;
-
-    @PostMapping("createMOrders")
-    public ResultVO createMOrders(@RequestBody MOrders mOrders) {
-        log.info("createMOrders start:" + JSON.toJSONString(mOrders));
-        try {
-            mOrdersService.createMOrders(mOrders);
-            return ResultVO.success();
-        } catch (Exception e) {
-            log.error("createMOrders error", e);
-            return ResultVO.fail();
-        }
-    }
 
     @PostMapping(value = "/login")
     public ResultVO login(@RequestBody LoginDTO dto) {
@@ -126,32 +109,5 @@ public class UserController {
             log.error("sendMsg error", e);
             return ResultVO.fail("网络异常，请稍后再试");
         }
-    }
-
-    @PostMapping(value = "/test")
-    public ResultVO test(@RequestBody User user) {
-
-        return ResultVO.fail();
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-//        String str = "13111110495";
-//        String pwd = "jfg204gh24g20gh024jfg203fj20g";
-//        String type = "1";
-//
-//
-//        String token = "eyJhbGciOiJIUzI1NiIsIlR5cGUiOiJKd3QiLCJ0eXAiOiJKV1QifQ.eyJ0ZWwiOiIxMzExMTExMDQ5NSIsInB3ZCI6ImpmZzIwNGdoMjRnMjBnaDAyNGpmZzIwM2ZqMjBnIiwidHlwZSI6IjEiLCJleHAiOjE1Nzk3NjY5MTJ9.Ktp1eoxIiVCS0DfPCz6gkwPt-8v-kRIZWQFych0CcYs";
-//
-//            Thread.sleep(1000);
-//            //String token = TokenUtil.sign(str, pwd, type);
-//
-//            System.out.println( 3600 * 24 * 7 * 1000);
-//
-//            System.out.println(TokenUtil.verify(token));
-
-
-        System.out.println(Number62.encoding(131111104952L));
-
-
     }
 }

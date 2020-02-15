@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fuck.core.mapper.MOrdersMapper">
+<mapper namespace="com.fuck.merchant.mapper.MOrdersMapper">
 
-    <resultMap id="BaseResultMap" type="com.fuck.core.entity.MOrders">
+    <resultMap id="BaseResultMap" type="com.fuck.merchant.entity.MOrders">
         <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
         <result column="m_no" jdbcType="VARCHAR" property="mNo"/>
         <result column="m_orders_type" jdbcType="VARCHAR" property="mOrdersType"/>
         <result column="m_money" jdbcType="DOUBLE" property="mMoney"/>
@@ -19,34 +20,37 @@
 
 
     <sql id="Base_Column_List">
-      id,m_no, m_orders_type, m_money, m_url, m_status, m_expiration_time, m_p, m_c, m_a,
-      create_time, update_time
+        id,user_id,m_no, m_orders_type, m_money, m_url, m_status, m_expiration_time, m_p, m_c, m_a,
+        create_time, update_time
     </sql>
 
 
     <delete id="delete" parameterType="java.lang.Long">
-      delete from m_orders
-      where id = #{id,jdbcType=BIGINT}
+        delete from m_orders
+        where id = #{id,jdbcType=BIGINT}
     </delete>
 
 
-    <insert id="insert" parameterType="com.fuck.core.entity.MOrders">
-      insert into m_orders (id,m_no, m_orders_type,
+    <insert id="insert" parameterType="com.fuck.merchant.entity.MOrders">
+        insert into m_orders (id,user_id,m_no, m_orders_type,
         m_money, m_url, m_status,
         m_expiration_time, m_p, m_c,
         m_a)
-      values (#{id,jdbcType=BIGINT}, #{mNo,jdbcType=VARCHAR}, #{mOrdersType,jdbcType=VARCHAR},
+        values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT},#{mNo,jdbcType=VARCHAR}, #{mOrdersType,jdbcType=VARCHAR},
         #{mMoney,jdbcType=DOUBLE}, #{mUrl,jdbcType=VARCHAR}, #{mStatus,jdbcType=VARCHAR},
         #{mExpirationTime,jdbcType=INTEGER}, #{mP,jdbcType=VARCHAR}, #{mC,jdbcType=VARCHAR},
         #{mA,jdbcType=VARCHAR})
     </insert>
 
 
-    <insert id="insertDynamic" parameterType="com.fuck.core.entity.MOrders">
+    <insert id="insertDynamic" parameterType="com.fuck.merchant.entity.MOrders">
         insert into m_orders
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
+            </if>
+            <if test="userId != null">
+                user_id,
             </if>
             <if test="mNo != null">
                 m_no,
@@ -86,6 +90,9 @@
             <if test="id != null">
                 #{id,jdbcType=BIGINT},
             </if>
+            <if test="userId != null">
+                #{user_id,jdbcType=BIGINT},
+            </if>
             <if test="mNo != null">
                 #{mNo,jdbcType=VARCHAR},
             </if>
@@ -123,7 +130,7 @@
     </insert>
 
 
-    <update id="updateDynamic" parameterType="com.fuck.core.entity.MOrders">
+    <update id="updateDynamic" parameterType="com.fuck.merchant.entity.MOrders">
         update m_orders
         <set>
             <if test="mNo != null">
@@ -153,12 +160,6 @@
             <if test="mA != null">
                 m_a = #{mA,jdbcType=VARCHAR},
             </if>
-            <if test="createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
-            </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
@@ -171,7 +172,7 @@
         where id = #{id,jdbcType=BIGINT}
     </select>
 
-    <select id="selectDynamic" parameterType="com.fuck.core.entity.MOrders" resultMap="BaseResultMap">
+    <select id="selectDynamic" parameterType="com.fuck.merchant.entity.MOrders" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from user
@@ -179,6 +180,9 @@
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 and id = #{id,jdbcType=BIGINT},
+            </if>
+            <if test="userId != null">
+                and user_id = #{user_id,jdbcType=BIGINT},
             </if>
             <if test="mNo != null">
                 and m_no = #{mNo,jdbcType=VARCHAR},

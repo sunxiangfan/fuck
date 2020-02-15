@@ -1,7 +1,6 @@
-package com.fuck.core.mapper;
+package com.fuck.merchant.mapper;
 
-import com.fuck.core.entity.MOrders;
-import org.apache.ibatis.annotations.Mapper;
+import com.fuck.merchant.entity.MOrders;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ public interface MOrdersMapper {
 
     int update(MOrders mOrders);
 
-    MOrders selectById(Integer id);
+    MOrders selectById(Long id);
 
     List<MOrders> selectDynamic(MOrders mOrders);
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fuck.core.mapper.UserMapper">
+<mapper namespace="com.fuck.merchant.mapper.UserMapper">
 
-    <resultMap id="BaseResultMap" type="com.fuck.core.entity.User">
+    <resultMap id="BaseResultMap" type="com.fuck.merchant.entity.User">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
@@ -30,7 +30,7 @@
     </delete>
 
 
-    <insert id="insert" parameterType="com.fuck.core.entity.User">
+    <insert id="insert" parameterType="com.fuck.merchant.entity.User">
       insert into user ( name, mobile, password, balance, freeze,
         merchantno, type, invitationCode, superiorCode)
       values ( #{name,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},
@@ -39,7 +39,7 @@
     </insert>
 
 
-    <insert id="insertDynamic" parameterType="com.fuck.core.entity.User">
+    <insert id="insertDynamic" parameterType="com.fuck.merchant.entity.User">
         insert into user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -126,7 +126,7 @@
     </insert>
 
 
-    <update id="updateDynamic" parameterType="com.fuck.core.entity.User">
+    <update id="updateDynamic" parameterType="com.fuck.merchant.entity.User">
         update user
         <set>
             <if test="name != null">

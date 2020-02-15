@@ -1,13 +1,15 @@
-package com.fuck.core.entity;
+package com.fuck.merchant.entity;
 
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class UOrders {
+public class UOrders extends BaseEntity {
 
-    private Long uId;
+    private Long id;
+
+    private Long userId;
 
     private Long mId;
 

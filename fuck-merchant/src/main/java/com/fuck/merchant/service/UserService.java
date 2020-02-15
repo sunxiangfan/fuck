@@ -1,6 +1,6 @@
-package com.fuck.core.service;
+package com.fuck.merchant.service;
 
-import com.fuck.core.entity.User;
+import com.fuck.merchant.entity.User;
 
 public interface UserService {
 

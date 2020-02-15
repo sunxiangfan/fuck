@@ -1,8 +1,8 @@
-package com.fuck.core.service.impl;
+package com.fuck.merchant.service.impl;
 
-import com.fuck.core.entity.User;
-import com.fuck.core.mapper.UserMapper;
-import com.fuck.core.service.UserService;
+import com.fuck.merchant.entity.User;
+import com.fuck.merchant.mapper.UserMapper;
+import com.fuck.merchant.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

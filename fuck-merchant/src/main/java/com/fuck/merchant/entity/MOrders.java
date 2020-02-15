@@ -1,13 +1,15 @@
-package com.fuck.core.entity;
+package com.fuck.merchant.entity;
 
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class MOrders {
+public class MOrders extends BaseEntity {
 
     private Long id;
+
+    private Long userId;
 
     private String mNo;
 

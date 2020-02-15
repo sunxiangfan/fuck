@@ -1,4 +1,4 @@
-package com.fuck.core.result;
+package com.fuck.merchant.result;
 
 import lombok.Data;
 

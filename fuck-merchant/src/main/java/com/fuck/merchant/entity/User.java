@@ -1,4 +1,4 @@
-package com.fuck.core.entity;
+package com.fuck.merchant.entity;
 
 import lombok.Data;
 

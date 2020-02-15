@@ -1,6 +1,6 @@
-package com.fuck.core.mapper;
+package com.fuck.merchant.mapper;
 
-import com.fuck.core.entity.User;
+import com.fuck.merchant.entity.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public interface UserMapper {
 
     List<User> selectDynamic(User user);
 
-    int freezeMoney(double money);
+    int freezeMoney(@Param("userId") Long userId, @Param("money") Double money);
 
     User findUserByMobileAndType(@Param("mobile") String mobile, @Param("type") String type);
 }

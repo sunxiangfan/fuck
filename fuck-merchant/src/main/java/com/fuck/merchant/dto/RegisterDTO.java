@@ -1,4 +1,4 @@
-package com.fuck.core.dto;
+package com.fuck.merchant.dto;
 
 import lombok.Data;
 
